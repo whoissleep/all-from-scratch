@@ -179,7 +179,6 @@ print("-" * 50)
 class DynamicTanh(nn.Module):
     def __init__(self, dim, init_alpha=0.5):
         super().__init__()
-        self.dim = dim
         self.alpha = nn.Parameter(torch.ones(1) * self.alpha)
         self.gamma = nn.Parameter(torch.ones(dim))
         self.beta = nn.Parameter(torch.zeros(dim))
