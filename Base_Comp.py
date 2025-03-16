@@ -1,5 +1,6 @@
 import numpy as np
 import torch
+import torch.nn as nn
 
 
 #Линейный слой на NumPy
@@ -174,3 +175,18 @@ self_attention = Self_Attention_pt(embed_dim)
 output_pt = self_attention(x)
 print(output_pt)
 print("-" * 50)
+
+class DynamicTanh(nn.Module):
+    def __init__(self, dim, init_alpha=0.5):
+        super().__init__()
+        self.dim = dim
+        self.alpha = nn.Parameter(torch.ones(1) * self.alpha)
+        self.gamma = nn.Parameter(torch.ones(dim))
+        self.beta = nn.Parameter(torch.zeros(dim))
+
+    def forward(self, x):
+        x = torch.tanh(self.alpha * x)
+        x = self.gamma * x + self.beta
+        return x
+    
+    
